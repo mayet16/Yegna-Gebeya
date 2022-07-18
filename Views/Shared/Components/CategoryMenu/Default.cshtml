@@ -1,0 +1,24 @@
+﻿
+<!-- Example single danger button -->
+<div class="btn-group">
+    <button class="btn btn-secondary btn-lg dropdown-toggle" 
+            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Products
+    </button>
+    <div class="dropdown-menu">
+
+        <a class="dropdown-item" asp-controller="Product" asp-action="Index"
+           asp-route-category="">View All Products</a>
+        @foreach (var category in Model)
+        {
+
+            <div>
+                <a class="dropdown-item" asp-controller="Product" asp-action="List"
+                   asp-route-category="@category.Category_Name">@category.Category_Name</a>
+            </div>
+
+        }
+
+    </div>
+</div>
+

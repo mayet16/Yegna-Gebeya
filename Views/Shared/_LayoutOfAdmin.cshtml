@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject RoleManager<UserRole> RoleManager
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - YegnaGebiyaSystem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Administrator" asp-action="Dashboard" style="position:center">YegnaGebiyaSystem</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    @*If the user is signed-in display Logout link*@
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-controller="account" asp-action="logout">
+                                <button type="submit" style="width:auto"
+                                        class="nav-link btn btn-link py-0">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="register">
+                                Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="login">
+                                Login
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <link rel="stylesheet" href="~/css/site.css" />
+            <nav class=" nav navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div>
+                    <a class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse navbar-brand text-center" asp-controller="Administrator" asp-action="Dashboard">Yegna Gebiya System</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="container-login100-form-btn">
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="Dashboard">Dashboard</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="ViewCatagory">View catagory</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="ViewUsers">View users</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="ViewState">User state</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="ViewProduct">View product</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="ViewTracsaction">View transaction</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="Feedback">Feedback</a>
+                        <a class="login100-form-btn navigater navbar-collapse collapse d-sm-inline-flex nav-link text-dark" asp-area="" asp-controller="Administrator" asp-action="Profile">Profile</a>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" style="  position: absolute;  bottom: 0; width: 100%;">
+        <div class="container">
+            &copy; 2019 - YegnaGebiyaSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/CustomScript.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
+</body>
+</html>

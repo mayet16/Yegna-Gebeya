@@ -1,0 +1,47 @@
+﻿
+@model ProductViewModel
+@{ 
+      Layout = "My_Layout1";
+ }
+<link href="~/css/catagorylist.css" rel="stylesheet" />
+<h1 id="errorMessage">@ViewBag.PleaseSelect</h1>
+<form asp-controller="Product" asp-action="Addproduct" method="post" id="catagoryAndsubcatagory">
+    <div>
+
+        <label>Catagory:</label> <select id="catagoryList" asp-items="@(new SelectList(@ViewBag.ListofCategory,"Category_ID","Category_Name","Desceiption"))"></select>
+
+        <br />
+        <label>SubCatagory:</label>  <select asp-for="subCatagoryId" id="subCatagoryList" asp-items="@(new SelectList(string.Empty,"Id","SubcatagoryName"))"></select>
+    </div>
+
+    <button type="submit" id="submit">Submit</button>
+
+</form>
+@*//<script src="~/lib/jquery/jquery.js"></script>*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var items = "<option value='0'>Selected</option>";
+        $("#subCatagoryList").html(items);
+    });
+
+    $("#catagoryList").change(function () {
+        var category_ID = $("#catagoryList").val();
+        var url = "/Product/GetSubCatagoryList";
+
+        $.getJSON(url, { Category_ID: category_ID }, function (data) {
+            var item = "";
+            $("#subCatagoryList").empty();
+            $.each(data, function (i, subcatagory) {
+                item += '<option value="' + subcatagory.value + '">' + subcatagory.text + '</option>'
+            });
+            $("#subCatagoryList").html(item);
+        });
+    });
+
+
+</script>
+
+
+

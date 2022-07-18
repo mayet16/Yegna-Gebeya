@@ -1,0 +1,47 @@
+﻿@model ReplayToCommentViewModel
+@{
+    Layout = "My_Layout1";
+}
+<style>
+    #replayComment {
+        /*border:solid ;*/
+        width: 30%;
+        margin-top: 130px;
+        margin-left: 430px;
+        background: blueviolet;
+        border-radius: 8px;
+    }
+
+    textarea {
+        width: 100%;
+        border-radius: 10px;
+        border-color: blueviolet;
+        height: 170%;
+    }
+
+        textarea:hover {
+            background: #808080;
+            cursor: pointer;
+        }
+
+    #submit {
+        background: #ff6a00;
+        float: right;
+        border-radius: 10px;
+        padding: 8px;
+        width: 30%;
+    }
+
+        #submit:hover {
+            cursor: pointer;
+        }
+</style>
+
+
+<form id="replayComment" asp-action="ReplayToComment" asp-controller="Product" method="post">
+    <label hidden asp-for="Id"></label>
+    <input hidden asp-for="Id" />
+    <h3><label>Write Your Replay Here</label></h3>
+    <textarea asp-for="replay"></textarea>
+    <button id="submit" type="submit">Submit</button>
+</form>

@@ -1,0 +1,301 @@
+﻿
+@model ProductViewModel
+
+@{
+    Layout = "My_Layout1";
+    ViewBag.Title = "Product Detials";
+    var PhotoPath = "~/Images/" + (Model.Product.Image ?? "half.jpg");
+}
+
+<link href="~/css/Addproduct.css" rel="stylesheet" />
+
+<style>
+    input {
+        background: #eae7e7
+    }
+</style>
+<form id="form">
+    <div>
+        <img src="@PhotoPath" class="image" asp-append-version="true" style="width:23%;height:26% ;border-radius:4px;margin-left:300px;" />
+
+    </div>
+
+
+    <div>
+
+        <input readonly value="@Model.Product.Name" />
+        <label asp-for="@Model.Product.Name"></label>
+
+    </div>
+    <div>
+
+        <input readonly value="@Model.Product.Quantity" />
+        <label asp-for="@Model.Product.Quantity"></label>
+
+    </div>
+    <div>
+
+        <input readonly value="@Model.Product.Price" />
+        <label asp-for="@Model.Product.Price"></label>
+
+    </div>
+    <div>
+
+
+        <input readonly asp-for="@Model.Product.Services">
+
+        <label asp-for="@Model.Product.Services"></label>
+    </div>
+
+    @foreach (var cars in Model.Product.Cars)
+    {
+        <div>
+
+            <input readonly value="@cars.Model">
+            <label asp-for="@Model.Car.Model"></label>
+        </div>
+
+        <div>
+
+            <input readonly value="@cars.fueltype">
+            <label asp-for="@Model.Car.fueltype"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cars.Transmission" />
+            <label asp-for="@Model.Car.Transmission"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cars.Airbag">
+
+            <label asp-for="@Model.Car.Airbag"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cars.Type">
+            <label asp-for="@Model.Car.Type"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cars.Capacity" />
+            <label asp-for="@Model.Car.Capacity"></label>
+        </div>
+    }
+    @foreach (var book in Model.Product.Books)
+    {
+
+        <div>
+
+            <input readonly value="@book.ISBN">
+            <label asp-for="@Model.Book.ISBN"></label>
+        </div>
+        <div>
+
+            <input readonly value="@book.No_page" />
+            <label asp-for="@Model.Book.No_page"></label>
+        </div>
+        <div>
+
+            <input readonly value="@book.Type">
+            <label asp-for="@Model.Book.Type"></label>
+        </div>
+        <div>
+
+            <input readonly value="@book.Author">
+            <label asp-for="@Model.Book.Author"></label>
+        </div>
+
+    }
+    @foreach (var computer in Model.Product.Computers)
+    {
+        <div>
+
+            <input readonly value="@computer.Model" />
+            <label asp-for="@Model.Computer.Model"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.Core" />
+            <label asp-for="@Model.Computer.Core"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.CPU" />
+            <label asp-for="@Model.Computer.CPU"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.RAM" />
+            <label asp-for="@Model.Computer.RAM"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.Procesor_Speed" />
+            <label asp-for="@Model.Computer.Procesor_Speed"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.Processor_Type" />
+            <label asp-for="@Model.Computer.Processor_Type"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.OS" />
+            <label asp-for="@Model.Computer.OS"></label>
+        </div>
+        <div>
+
+            <input readonly asp-for="@Model.Computer.Hard_Disk" required id="Hard_Disk" placeholder="Hard_Disk ( only number)" onkeypress="onlyIntAndDuble(event)" value="" type="text">
+            <label asp-for="@Model.Computer.Hard_Disk"></label>
+        </div>
+
+        <div>
+
+            <input readonly asp-for="@Model.Computer.Resolution" placeholder="Resolution" required>
+            <label asp-for="@Model.Computer.Resolution"></label>
+        </div>
+        <div>
+
+            <input readonly value="@computer.Size" />
+            <label asp-for="@Model.Computer.Size"></label>
+        </div>
+
+    }
+
+    @foreach (var house in Model.Product.Houses)
+    {
+        <div>
+
+            <input readonly value="@house.Num_bedroom" />
+            <label asp-for="@Model.House.Num_bedroom"></label>
+        </div>
+
+        <div>
+
+            <input readonly value="@house.Location">
+            <label asp-for="@Model.House.Location"></label>
+        </div>
+        <div>
+
+            <input readonly value="@house.Num_Bathroom" />
+            <label asp-for="@Model.House.Num_Bathroom"></label>
+        </div>
+        <div>
+
+            <input readonly value="@house.Total_room" />
+            <label asp-for="@Model.House.Total_room"></label>
+        </div>
+        <div>
+
+            <input readonly value="@house.Type">
+            <label asp-for="@Model.House.Type"></label>
+        </div>
+    }
+
+    @foreach (var phone in Model.Product.Phones)
+    {
+        <div>
+
+            <input readonly value="@phone.Model">
+            <label asp-for="@Model.Phone.Model"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.Storage" />
+            <label asp-for="@Model.Phone.Storage"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.SIM_NO" />
+            <label asp-for="@Model.Phone.SIM_NO"></label>
+        </div>
+        <div>
+
+            <input value="@phone.Display" />
+            <label asp-for="@Model.Phone.Display"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.Resolution">
+            <label asp-for="@Model.Phone.Resolution"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.Card_Slot">
+            <label asp-for="@Model.Phone.Card_Slot"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.OS">
+            <label asp-for="@Model.Phone.OS"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.Main_Camera">
+            <label asp-for="@Model.Phone.Main_Camera"></label>
+        </div>
+
+        <div>
+
+            <input readonly value="@phone.Front_Camera">
+            <label asp-for="@Model.Phone.Front_Camera"></label>
+        </div>
+        <div>
+
+            <input readonly value="@phone.Finger_Print">
+            <label asp-for="@Model.Phone.Finger_Print"></label>
+        </div>
+    }
+    @foreach (var cloth in Model.Product.Cloths)
+    {
+        <div>
+
+            <input readonly value="@cloth.Brand">
+            <label asp-for="@Model.Cloth.Brand"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cloth.Size">
+            <label asp-for="@Model.Cloth.Size"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cloth.Color">
+            <label asp-for="@Model.Cloth.Color"></label>
+        </div>
+        <div>
+
+            <input readonly value="@cloth.Type">
+            <label asp-for="@Model.Cloth.Type"></label>
+        </div>
+    }
+    @foreach (var shose in Model.Product.Shoes)
+    {
+
+        <div>
+
+            <input readonly value="@shose.Brand">
+            <label asp-for="@Model.Shoes.Brand"></label>
+        </div>
+        <div>
+
+            <input readonly value="@shose.Size">
+            <label asp-for="@Model.Shoes.Size"></label>
+        </div>
+        <div>
+
+            <input readonly value="@shose.Color">
+            <label asp-for="@Model.Shoes.Color"></label>
+        </div>
+    }
+
+
+    <div class="Managenmet">
+        <a class="button" asp-controller="Product" asp-action="ProductList">Back</a>
+        <a class="button" asp-controller="Product" asp-action="EditProduct" asp-route-id="@Model.Product.ID">Edit</a>
+        <a class="button" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@Model.Product.ID"
+           onclick="return confirm('Are You Sure To Delete This Product:@Model.Product.Name')">Delete</a>
+    </div>
+
+</form>

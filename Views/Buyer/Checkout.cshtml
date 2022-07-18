@@ -1,0 +1,48 @@
+﻿@model Order
+
+@{
+    ViewBag.Title = "order";
+
+}
+
+<link href="~/css/Registration.css" rel="stylesheet" />
+<h5>You are just one step away to order the products</h5>
+<h4 style="color:red">@ViewBag.ErrorMessage</h4>
+<div class="register">
+    <div asp-validation-summary="All" style="color:red">
+
+    </div>
+    <form enctype="multipart/form-data" method="post" asp-action="Checkout"
+          asp-controller="Buyer" id="register">
+
+        <div class="userinput">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" required class="inputfield" id="email" />
+
+        </div>
+        <div class="userinput">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" required class="inputfield" id="Username" />
+            <span asp-validation-for="Username"></span>
+
+        </div>
+        <div class="userinput">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" required class="inputfield" id="Password" />
+            <span asp-validation-for="Password"></span>
+
+        </div>
+
+        <button type="submit" id="sub">Submit</button>
+        <button type="reset" id="sub">Cancel</button>
+    </form>
+</div>
+<script>
+    function onlynum(evt) {
+        var ch = String.fromCharCode(evt.which);
+        if (!(/[0-9]/.test(ch)) && !(/[+]/.test(ch))) {
+        evt.preventDefault();
+    }
+
+}
+</script>

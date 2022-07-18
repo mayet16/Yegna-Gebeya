@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<SellerOrderListViewModel>
+@{
+    Layout = "My_Layout1";
+}
+<link href="~/css/Table.css" rel="stylesheet" />
+@if (Model.Count() == 0)
+{
+
+    <h3 style="margin-left:500px;">You Have No Ordered Product</h3>
+}
+else
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>productId</th>
+                <th>Buyer Name</th>
+                <th>Buyer PhoneNumber</th>
+                <th>Product name  </th>
+                <th>Price</th>
+                <th>Orderd Date</th>
+                <th>Confirm Product</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var Orderdproduct in Model)
+            {
+                <tr>
+                    <td>@Orderdproduct.order_List.OrderDetailId</td>
+                    <td>@Orderdproduct.products.ID</td>
+                    <td>@Orderdproduct.users.Name</td>
+                    <td>@Orderdproduct.users.PhoneNumber</td>
+                    <td>@Orderdproduct.products.Name</td>
+                    <td>@Orderdproduct.products.Price Birr</td>
+                    <td>@Orderdproduct.order_List.Order.Orderplaced</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="ConfirmSeller" asp-route-id="@Orderdproduct.order_List.OrderDetailId"
+                           class="text-danger" onclick=" return confirm(' Confirm the order ?')">
+                            Confirm
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}

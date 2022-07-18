@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject RoleManager<UserRole> RoleManager
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Yegna Gebiya System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link href="~/js/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/custem_style.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <link href="~/lib/jquery-autocomplete/jquery.auto-complete.css" rel="stylesheet" />
+    <script src="~/js/CustomScript.js"></script>
+
+</head>
+<body>
+
+    <div>
+        <div class="bg-primary text-white">
+            <ul class="navbar-nav">
+                <li style="color:ghostwhite;padding-left:200px;">
+                    <h4>Welcome to Yegna Gebiya &nbsp;&nbsp; be online Make Your Life Easy</h4>
+                </li>
+                @await Component.InvokeAsync("ShoppingCartSummary") cart
+            </ul>
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="headers">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img src="~/images/logo.jpg" height="30" width="30" asp-append-version="true" />
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                <ul class="navbar-nav">
+                    <li class="nav-item link ">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+                    </li>
+                    @await Component.InvokeAsync("CategoryMenu")
+
+                    <li class="nav-item link ">
+                        <a asp-controller="Home" asp-action="About" class="nav-link">About US</a>
+                    </li>
+                    <li class="nav-item link ">
+                        <a asp-controller="Home" asp-action="Contact" class="nav-link">Contact us</a>
+                    </li>
+                    <li class="nav-item link ">
+                        <a asp-controller="Vendor" asp-action="Index" class="nav-link">Vendors</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
+                    {
+                        <li class="nav-item link ">
+                            <a href="~/Product/ProductList" class="nav-link">My Vendor Page</a>
+                        </li>
+                        <li class="nav-item link ">
+                            <a asp-controller="Buyer" asp-action="ViewOrder" class="nav-link">View Order</a>
+                        </li>
+                        <li class="nav-item link ">
+                            <a asp-controller="Buyer" asp-action="ViewHistory" class="nav-link">View History</a>
+                        </li>
+                        <li class="nav-item link ">
+                            <a asp-controller="Account" asp-action="ChangePassword" class="nav-link">Change Password</a>
+                        </li>
+                        <li class="float-sm-right link ">
+                            <a asp-controller="Account" asp-action="Profile" class="nav-link">Profile</a>
+                        </li>
+                        <li class="nav-item link ">
+                            <form method="post" asp-action="Logout" asp-controller="account">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item link">
+                            <a asp-controller="Account" asp-action="Register" class="nav-link">Create Account</a>
+                        </li>
+                        <li class="nav-item link ">
+                            <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <div class="search-div">
+            <!--Make sure the form has the autocomplete function switched off:-->
+            <form autocomplete="off" asp-controller="Product" asp-action="Index" method="get">
+                <span class="h2">Name : </span>
+                <div class="autocomplete" style="width:300px;">
+                    <input type="text" class="search-input" id="myInput"
+                           placeholder="Search...Item" name="SearchString" value="@ViewData["currentFilter"]" />
+                </div>
+                <input type="submit" value="Search" class="btn btn-primary" /> |&nbsp;
+                <a asp-controller="Product" asp-action="Index">Back to Full List</a>
+            </form>
+
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+        @if (IsSectionDefined("Scripts"))
+        {
+            @RenderSection("Scripts", required: true)
+        }
+    </div>
+
+    <div class="follow-us">
+        <ul class="email">
+            <li>
+                <input type="email" name="email" placeholder="enter your email" id="email" />
+            </li>
+            <li>
+                <input type="submit" name="submit" value="Submit email" id="submit-email" />
+            </li>
+        </ul>
+        <ul class="media">
+            <li>FOLLOW US</li>
+            <li>
+                <a href="www.instagram.com/ethiofasion" value="Instagram" target="_blank">
+                    <img src="~/images/instagram.png" id="instagram" />
+                </a>
+            </li>
+            <li>
+                <a href="www.facebook.com/ethiofasion" value="Facebook" target="_blank">
+                    <img src="~/images/facebook.png" id="facebook" />
+                </a>
+            </li>
+            <li>
+                <a href="www.twitter.com/ethiofasion" value="twitter" target="_blank">
+                    <img src="~/images/twitter.png" id="twitter" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        <div class="article column1">
+            <h3>MY ACCOUNT</h3>
+            <p>
+                <a href="#" onclick="document.getElementById('login-box').style.display='block'">Sign in</a>
+            </p>
+            <p>
+                <a href="#" onclick="document.getElementById('register-box').style.display='block'" id="register">Register</a>
+            </p>
+            <p>
+                <a href="contact-us.html" value="contact us">contact us</a>
+            </p>
+        </div>
+        <div class="article column2">
+            <h3>CUSTOMER SERVICES</h3>
+            <p>
+                <a href="#" onclick="document.getElementById('login-box').style.display='block'" id="login">about your order</a>
+            </p>
+            <p>
+                <a href="wishlist.html" value="wishlist">wishlist</a>
+            </p>
+            <p>
+                <a href="certificat.html" value="Gift certificates">Gift      certificates</a>
+            </p>
+        </div>
+        <div class="article column3">
+            <h3>ABOUT US</h3>
+            <p>
+                <a href="about-us.html" value="about">about us</a>
+            </p>
+            <p>
+                <a href="privacy.html" value="policy">privacy policy</a>
+            </p>
+        </div>
+    </div>
+    <div id="copy">
+        &copy; 2019 - YegnaGebiyaSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/lib/jquery-autocomplete/jquery.auto-complete.js"></script>
+
+    <script src="~/js/jquery-1.12.4.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+ 
+    <script>
+
+        //to highlight text
+        $(function () {
+           $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+            var highlighted = item.label.split(this.term).join('<strong style="color:red;">' + this.term +  '</strong>');
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append("<a>" + highlighted + "</a>")
+                .appendTo(ul);
+            };
+        });
+
+        //to popup data
+        $(function () {
+
+            $("#myInput").autocomplete({
+                source: '@Url.Action("getProduct","Product")'
+            });
+          //autocomplete(document.getElementById("myInput"), '@Url.Action("getProduct","Product")');
+        });
+    </script>
+
+</body>
+</html>

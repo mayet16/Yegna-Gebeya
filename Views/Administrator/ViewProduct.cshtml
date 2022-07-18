@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProductDisplayViewModel>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "View Product";
+}
+    <div class="container">
+        @if (Model.Any())
+        {
+            <table class="table table-hover border">
+                <thead style="background-color:aqua">
+                    <tr>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Category name</th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Seller name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <th scope="row">@product.product.ID</th>
+                            <td>@product.category.Category_Name</td>
+                            <td>@product.product.Name</td>
+                            <td>@product.seller.Users.Name</td>
+                            <td>@product.product.Status</td>
+                            <td>@product.product.Services</td>
+                            <td>@product.product.Quantity</td>
+                            <th>@product.product.Price Birr</th>
+                            <th>
+                                <a asp-controller="Administrator" asp-action="DeleteProduct" asp-route-id="@product.product.ID" class="btn btn-primary">Delete</a>
+                            </th>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <div class="card bo" style="margin-top: 30%; margin-left: 40%;">
+                <div class="card-header text-center">
+                    <h1>NO PRODUCT POSTED YET!!!</h1>
+                </div>
+            </div>
+        }
+    </div>

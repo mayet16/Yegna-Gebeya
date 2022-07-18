@@ -1,0 +1,36 @@
+﻿@model IEnumerable<orderListViewModel>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "View tracsaction";
+}
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <table class="table table-hover border">
+        <thead style="background-color:aqua">
+            <tr>
+                <th scope="col">Order Id</th>
+                <th scope="col">Seller Name</th>
+                <th scope="col">Buyer Name</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">State</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <th scope="row">@order.order_List.OrderDetailId</th>
+                    <td>@order.seller.Users.Name</td>
+                    <td>@order.buyer.Users.Name</td>
+                    <th>@order.order_List.Order.Orderplaced</th>
+                    <td>@order.product.Price</td>
+                    <td>@order.product.Quantity</td>
+                    <td>@order.product.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

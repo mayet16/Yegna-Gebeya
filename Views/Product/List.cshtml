@@ -1,0 +1,46 @@
+﻿@model ProductViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Product List";
+}
+<a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]"
+   asp-routecurrentFilter="@ViewData[" CurrentFilter"]">oldest to latest</a>&nbsp;
+<a asp-action="Index" asp-route-sortOrder="@ViewData["DatedesSortParm"]"
+   asp-routecurrentFilter="@ViewData[" CurrentFilter"]">latest to oldest</a>&nbsp;
+<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
+   asp-routecurrentFilter="@ViewData[" CurrentFilter"]">sort by Name</a>&nbsp;
+<a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]"
+   asp-routecurrentFilter="@ViewData[" CurrentFilter"]">sort by Low to High Price</a>&nbsp;
+<a asp-action="Index" asp-route-sortOrder="@ViewData["PriceDesSortParm"]"
+   asp-routecurrentFilter="@ViewData[" CurrentFilter"]">sort by High to Low Price</a>&nbsp;
+
+<div class="card-deck">
+    @foreach (var product in Model.Products)
+    {
+        var image = "~/images/" + (product.Image ?? "logo.jpg");
+
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+            <div class="card-header">
+
+                <h3>
+
+                    @product.Name
+                </h3>
+                <h3>
+                    @product.AddtDate
+                </h3>
+            </div>
+            <img class="card-img-top imageThumbnail" src="@image" asp-append-version="true" />
+            <div class="card-footer text-center">
+                <a asp-controller="Product" asp-action="details" asp-route-id="@product.ID" class="btn btn-primary">View</a>
+          <a asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-id="@product.ID" class="btn btn-primary" 
+               onclick=" return alert('You have Add : @product.Name to your cart');">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+
+    }
+
+</div>
+

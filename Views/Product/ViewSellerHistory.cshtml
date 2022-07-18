@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<SellerOrderListViewModel>
+@{
+    Layout = "My_Layout1";
+}
+<link href="~/css/Table.css" rel="stylesheet" />
+@if (Model.Count() == 0)
+{
+    <h3 style="margin-left:500px;">You Have No History Of Product</h3>
+}
+else
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>productId</th>
+                <th>Buyer Name</th>
+                <th>Buyer PhoneNumber</th>
+                <th>Product name  </th>
+                <th>Price</th>
+                <th>Sold Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var solddproduct in Model)
+            {
+                <tr>
+                    <td>@solddproduct.sold_Items.S_i_ID</td>
+                    <td>@solddproduct.products.ID</td>
+                    <td>@solddproduct.users.Name</td>
+                    <td>@solddproduct.users.PhoneNumber</td>
+                    <td>@solddproduct.products.Name</td>
+                    <td>@solddproduct.products.Price Birr</td>
+                    <td>@solddproduct.sold_Items.S_Date</td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}

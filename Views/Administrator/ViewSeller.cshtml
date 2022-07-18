@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SellerViewModel>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "View state";
+}
+    <div class="container">
+        <h1>List of Seller</h1>
+        <a asp-action="ViewState" class="btn btn-primary">List of Users</a>
+        <a asp-action="ViewSeller" class="btn btn-primary">List of Sellers</a>
+        <a asp-action="ViewBuyer" class="btn btn-primary">List of Buyers</a>
+
+        <br />
+        <br />
+
+        <table class="table table-hover border">
+            <thead style="background-color:aqua">
+                <tr>
+                    <th scope="col">Seller Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var seller in Model)
+                {
+                    <tr>
+                        <th scope="row">@seller.seller.Seller_ID</th>
+                        <td>@seller.user.Name</td>
+                        <td>@seller.seller.Users.PhoneNumber</td>
+                        <td>@seller.user.Sex</td>
+                        <td>@seller.user.Nationality</td>
+                        <td>@seller.seller.Address</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

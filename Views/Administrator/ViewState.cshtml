@@ -1,0 +1,49 @@
+﻿@model IEnumerable<User>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "View Status";
+}
+    <div class="container">
+        <h1>List of Users</h1>
+
+        <a asp-action="ViewStatus" class="btn btn-primary">List of Users</a>
+        <a asp-action="ViewSeller" class="btn btn-primary">List of Sellers</a>
+        <a asp-action="ViewBuyer" class="btn btn-primary">List of Buyers</a>
+
+        <br />
+        <br />
+
+        <table class="table table-hover border">
+            <thead style="background-color:aqua">
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <th scope="row">@user.Id</th>
+                        <td>@user.Name</td>
+                        <td>@user.UserName</td>
+                        <td>user</td>
+                        <td>
+                            @if (@user.Status == "Active")
+                            {
+                                <label class="text-info">@user.Status</label>
+                            }
+                            else if (@user.Status == "Deactive")
+                            {
+                                <label class="text-danger">@user.Status</label>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

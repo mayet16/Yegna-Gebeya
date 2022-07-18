@@ -1,0 +1,70 @@
+﻿@model ShoppingCartViewModel
+
+    <div class="row chekoutForm">
+        <h2>Your Shopping Cart</h2><br />
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Selected Amount</th>
+                    <th>Product</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="text-center">@line.Amount</td>
+                        <td class="text-left">@line.Product.Name</td>
+                        <td class="text-right">@line.Product.Price.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Amount * line.Product.Price).ToString("c"))
+                        </td>
+                        <td class="text-center">
+                            <a class="glyphicon text-danger remove" asp-controller="ShoppingCart"
+                               asp-action="RemoveFromShoppingCart" asp-route-id="@line.productId"
+                               onclick=" return alert('You have Removed one : @line.Product.Name from your cart');">
+                                Remove From Shopping Cart
+                            </a>
+                        </td>
+             
+                    </tr>
+
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total : </td>
+                    <td class="text-right">
+                        @Model.ShoppingCartTotal.ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+
+        </table>
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout"  asp-route-data="@Model.ShoppingCartTotal" >Check Out</a>
+
+                <div class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <div class="navbar-nav">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-lg dropdown-toggle"
+                                    type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Add More Products
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" asp-controller="Product" asp-action="List" asp-route-category="electronics">electronics</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="List" asp-route-category="house">House</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="List" asp-route-category="fasion">Fasion</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="List" asp-route-category="car">Car</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="List" asp-route-category="book">Book</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>

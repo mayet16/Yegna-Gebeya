@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SellerOrderListViewModel>
+
+@{
+    Layout = "My_Layout1";
+}
+<link href="~/css/Table.css" rel="stylesheet" />
+<script src="~/js/jquery-1.12.4.js"></script>
+<link href="~/js/jquery-ui.css" rel="stylesheet" />
+<script src="~/js/jquery-ui.js"></script>
+<script src="~/js/searchfilter.js"></script>
+<link href="~/js/style.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $('#productName').autocomplete({
+            source: '/api/product/search'
+        });
+    });
+</script>
+
+@if (Model.Count() == 0)
+{
+    <div style="margin-left:500px;">
+        <h3 style=" color:#191818;">You Have No Product For Sale</h3>
+        <a style="border:solid; padding:10px; text-decoration:none;" asp-controller="Product" asp-action="Catagorylist">+ AddProduct </a>
+    </div>
+}
+
+else
+{
+    <div>
+     
+            <input type="text"  id="productName" placeholder="Input your keyword"   />
+            <button id="myBtn" onclick="myFunction()">Search</button>
+        
+        <h4 style="background:#00ff21;margin-left:270px;">Total Number of Product You Have:[@Model.Count()]</h4>
+    </div>
+    <table border="1" id="myTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Service  </th>
+                <th>Price</th>
+                <th>No Of Comment</th>
+                <th>View Detials</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var product in Model)
+            {
+                <tr>
+
+                    <td>@product.products.ID</td>
+                    <td>@product.products.Name</td>
+                    <td>@product.products.Quantity</td>
+                    <td>@product.products.Services</td>
+                    <td>@product.products.Price</td>
+                    <td>
+                        @product.commentcount
+                        @if (@product.commentcount != 0)
+                        {<a asp-controller="Product" asp-action="ViewComment" asp-route-id="@product.products.ID">View</a>}
+                    </td>
+                    <td style="width:auto;">
+                        <a asp-controller="Product" asp-action="Productdetails" asp-route-id="@product.products.ID">
+                            View
+                        </a>
+                    </td>
+
+                    <td>
+                        <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.products.ID"
+                           onclick="return confirm('Are You Sure To Delete This Product:@product.products.Name')">
+                            <img src="~/images/usedimage/reddelete.png" style="width:6%;height:8% " />
+                        </a>
+                    </td>
+                </tr>
+
+
+
+            }
+        </tbody>
+    </table>
+}
+

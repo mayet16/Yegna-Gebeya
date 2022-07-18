@@ -1,0 +1,54 @@
+﻿@model HomeViewModel
+@{
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer Home Page";
+}
+<div class="card-deck">
+    @foreach (var product in Model.Products)
+    {
+        var image = "~/images/" + (product.Image ?? "logo.jpg");
+
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+            <div class="card-header">
+                <h3>@product.Name</h3>
+            </div>
+            <img class="card-img-top imageThumbnail" src="@image" asp-append-version="true" />
+            <div class="card-footer text-center">
+                <a asp-controller="Product" asp-action="details" asp-route-id="@product.ID" class="btn btn-primary">View</a>
+               <a asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                  onclick=" return alert('You have Add : @product.Name to your cart');"
+                   asp-route-id="@product.ID" class="btn btn-primary">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+
+    }
+
+</div>
+<div class="card-body" style="float:right;">
+    <div>
+        <form asp-controller="Home" asp-action="SendFeedback" method="post">
+
+            <textarea asp-for="Feedback.FeedbackBody" placeholder="Enter Your Feedback"
+                      rows="4" cols="30" style="border-radius:5px;padding-left:15px;"> </textarea>
+            <input type="submit" value="Send" class="btn btn-secondary"
+                   style="margin-bottom:30px;" />
+        </form>
+    </div>
+</div>
+
+<div>
+    @foreach (var feedback in Model.Feedbacks.OrderByDescending(f => f.Sent_Date))
+    {
+        <div>
+            <h5>Sender :<span style="color:dodgerblue;"> @feedback.Users.Name</span></h5>
+
+            <span style="color:crimson;font-size:20px;"> @feedback.FeedbackBody</span>
+            <span style="color:tomato;margin-left:200px;">Admin :</span>
+            <span style="color:dodgerblue;margin-left:20px; font-size:20px;"><span>Replay</span> : @feedback.Replay</span>
+        </div><br />
+    }
+
+</div>
+

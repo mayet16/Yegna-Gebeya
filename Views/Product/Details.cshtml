@@ -1,0 +1,140 @@
+﻿@model ProductViewModel
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Product.Name</h1>
+                <h3>
+                    @Model.Product.AddtDate
+                </h3>
+            </div>
+            @{
+                var image = "~/images/" + (@Model.Product.Image ?? "logo.jpg");
+            }
+
+            <div class=" card-body text-center">
+                <img class="card-img-top imageThumbnail" src="@image" asp-append-version="true" />
+
+                <h4>Product Price : @Model.Product.Price ETB</h4>
+                <h4>Product services : @Model.Product.Services</h4>
+
+                @foreach (var shoes in Model.Product.Shoes)
+                {
+                    <h4>Shoes Size : @shoes.Size</h4>
+                    <h4>Shoes Brand : @shoes.Brand</h4>
+                    <h4>Shoes color : @shoes.Color</h4>
+                }
+
+                @foreach (var book in Model.Product.Books)
+                {
+                    <h4>ISBN number : @book.ISBN</h4>
+                    <h4>Number of page : @book.No_page</h4>
+                    <h4>Book type : @book.Type</h4>
+                    <h4>Author name : @book.Author</h4>
+                }
+
+                @foreach (var car in Model.Product.Cars)
+                {
+                    <h4>Model : @car.Model</h4>
+                    <h4>Fuel type : @car.fueltype</h4>
+                    <h4>Transmision : @car.Transmission</h4>
+                    <h4>AirBag : @car.Airbag</h4>
+                    <h4>Type : @car.Type</h4>
+                    <h4>Capacity : @car.Capacity</h4>
+                }
+
+                @foreach (var cloth in Model.Product.Cloths)
+                {
+                    <h4>Brand : @cloth.Brand</h4>
+                    <h4>Size : @cloth.Size</h4>
+                    <h4> type : @cloth.Type</h4>
+                    <h4>Color : @cloth.Color</h4>
+                }
+
+                @foreach (var computer in Model.Product.Computers)
+                {
+                    <h4>Model : @computer.Model</h4>
+                    <h4>Core : @computer.Core</h4>
+                    <h4>CPU : @computer.CPU</h4>
+                    <h4>RAM : @computer.RAM</h4>
+                    <h4>Processor Speed : @computer.Procesor_Speed</h4>
+                    <h4>Processor Type : @computer.Processor_Type</h4>
+                    <h4>Operating system : @computer.OS</h4>
+                    <h4>Hard Disk : @computer.Hard_Disk</h4>
+                    <h4>Resolution : @computer.Resolution</h4>
+                    <h4>Size :@computer.Size</h4>
+                }
+
+                @foreach (var house in Model.Product.Houses)
+                {
+                    <h4>Location : @house.Location</h4>
+                    <h4>Number of Bath Room : @house.Num_Bathroom</h4>
+                    <h4>Number of Bed Room : @house.Num_bedroom</h4>
+                    <h4>type : @house.Type</h4>
+                    <h4>Number of total Room : @house.Total_room</h4>
+                }
+
+                @foreach (var phone in Model.Product.Phones)
+                {
+
+                    <h4>Model : @phone.Model</h4>
+                    <h4>Storage : @phone.Storage</h4>
+                    <h4>SIM number : @phone.SIM_NO</h4>
+                    <h4>Display : @phone.Display</h4>
+                    <h4>Card Slot : @phone.Card_Slot</h4>
+                    <h4>Main Camera : @phone.Main_Camera</h4>
+                    <h4>Front Camera : @phone.Front_Camera</h4>
+                    <h4>Operating system : @phone.OS</h4>
+                    <h4>Resolution : @phone.Resolution</h4>
+                    <h4>Finger Print : @phone.Finger_Print</h4>
+                }
+
+
+                <h5 style="color:dodgerblue;">Seller Address : @Model.Product.Sellers.Address</h5>
+                <a asp-controller="Vendor" asp-action="details" asp-route-Id="@Model.Product.Sellers.Seller_ID">
+                    <h5 style="color:dodgerblue;">Seller Name : @Model.Product.Sellers.Users.Name  =>  <span style="color:midnightblue;">View Details</span></h5>
+                </a>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Product" asp-action="index" class="btn btn-primary">Back</a>
+             <a asp-controller="ShoppingCart" asp-action="AddToShoppingCart" 
+                        onclick=" return alert('You have Add  : @Model.Product.Name to your cart');"
+                        asp-route-id="@Model.Product.ID" class="btn btn-primary">
+                    Add to Cart
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card-body" style="margin-left:600px;">
+    <div>
+        <form asp-controller="Product" asp-action="SendComment" asp-route-id="@Model.Product.ID" method="post">
+
+            <textarea asp-for="CommentBody" placeholder="Enter Your Comment"
+                      rows="4" cols="30" style="border-radius:5px;padding-left:15px;"> </textarea>
+            <input type="hidden" asp-for="PId" value="@Model.Product.ID" />
+            <input type="submit" value="Send" class="btn btn-secondary"
+                   style="margin-bottom:30px;" />
+        </form>
+    </div>
+    <div>
+        <div class="card-body">
+            @foreach (var comment in Model.Product.Comments.OrderByDescending(c => c.Com_ID))
+            {
+                <h5 style="color:dodgerblue;"> @comment.Buyers.Users.Name</h5>
+                <h4> @comment.CommentBody</h4>
+                <p style="color:steelblue;"> @comment.Sent_Date</p>}
+        </div>
+    </div>
+</div>
+
+

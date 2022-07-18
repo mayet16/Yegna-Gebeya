@@ -1,0 +1,358 @@
+﻿
+@model ProductViewModel
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "My_Layout1";
+
+    var PhotoPath = "~/images/" + (Model.Product.Image);
+
+
+
+}
+
+<link href="~/css/Addproduct.css" rel="stylesheet" />
+<script src="~/js/InputValidation.js"></script>
+<div> <p style="color:red" id="demo"></p> </div>
+<h3>  <span style="margin-left:500px;"> Edit Product </span></h3>
+<form enctype="multipart/form-data" asp-action="EditProduct" id="form" asp-controller="Product" onsubmit="return ValidateAddProductForm();" method="post">
+    <input hidden asp-for="@Model.Product.ID" />
+    <input hidden asp-for="SubCatagoryName" id="SubCatagoryName" />
+    <input hidden asp-for="@Model.Product.Image" />
+    
+    <div>
+        <input asp-for="@Model.Product.Name" placeholder="Name" required />
+        <label asp-for="@Model.Product.Name"></label>
+
+    </div>
+    <div>
+        <input asp-for="@Model.Product.Quantity" placeholder="Quantity" id="Quantity" required />
+        <label asp-for="@Model.Product.Quantity"></label>
+    </div>
+    <div>
+        <input asp-for="@Model.Product.Price" placeholder="Price" id="Price" required />
+        <label asp-for="@Model.Product.Price"></label>
+
+    </div>
+
+    <div>
+        <select asp-for="@Model.Product.Services">
+            <option value="Used"> Used</option>
+            <option value="New"> New</option>
+        </select>
+        <label asp-for="@Model.Product.Services"></label>
+        <span asp-validation-for="@Model.Product.Services"></span>
+    </div>
+    @if (Model.Book != null)
+    {
+        <div>
+
+            <input asp-for="@Model.Book.ISBN" placeholder="ISBN" id="ISBN" required />
+            <label asp-for="@Model.Book.ISBN"></label>
+            <span asp-validation-for="@Model.Book.ISBN"></span>
+
+        </div>
+
+        <div>
+
+            <input asp-for="@Model.Book.Type" placeholder="Type" required />
+            <label asp-for="@Model.Book.Type"></label>
+            <span asp-validation-for="@Model.Book.Type"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.No_page" placeholder="No_Pages" id="No_page" required />
+            <label asp-for="@Model.Book.No_page"></label>
+            <span asp-validation-for="@Model.Book.No_page"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.Author" placeholder="Author" required />
+            <label asp-for="@Model.Book.Author"></label>
+            <span asp-validation-for="@Model.Book.Author"></span>
+        </div>
+    }
+    else if (Model.Computer != null)
+    {
+        <div>
+
+            <input asp-for="@Model.Computer.Model" placeholder="Model" required />
+            <label asp-for="@Model.Computer.Model"></label>
+            <span asp-validation-for="@Model.Computer.Model"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Core" placeholder="Core" required />
+            <label asp-for="@Model.Computer.Core"></label>
+            <span asp-validation-for="@Model.Computer.Core"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.CPU" placeholder="CPU" id="CPU" required />
+            <label asp-for="@Model.Computer.CPU"></label>
+            <span asp-validation-for="@Model.Computer.CPU"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.RAM" placeholder="RAM" id="RAM" required />
+            <label asp-for="@Model.Computer.RAM"></label>
+            <span asp-validation-for="@Model.Computer.RAM"></span>
+        </div>
+
+        <div>
+
+            <input asp-for="@Model.Computer.Procesor_Speed" id="Processer_Speed" placeholder="Processer_Speed" required />
+            <label asp-for="@Model.Computer.Procesor_Speed"></label>
+            <span asp-validation-for="@Model.Computer.Procesor_Speed"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Processor_Type" placeholder="Processer_Type" required />
+            <label asp-for="@Model.Computer.Processor_Type"></label>
+            <span asp-validation-for="@Model.Computer.Processor_Type"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.OS" placeholder="OS" required />
+            <label asp-for="@Model.Computer.OS"></label>
+            <span asp-validation-for="@Model.Computer.OS"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Hard_Disk" id="Hard_Disk" placeholder="Hard_Disk" required />
+            <label asp-for="@Model.Computer.Hard_Disk"></label>
+            <span asp-validation-for="@Model.Computer.Hard_Disk"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Size" placeholder="Size" id="Size" required />
+            <label asp-for="@Model.Computer.Size"></label>
+            <span asp-validation-for="@Model.Computer.Size"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Resolution" placeholder="Resolution" required />
+            <label asp-for="@Model.Computer.Resolution"></label>
+            <span asp-validation-for="@Model.Computer.Resolution"></span>
+        </div>
+    }
+    else if (Model.Phone != null)
+    {
+        <input asp-for="@Model.Phone.P_ID" placeholder="Model" hidden />
+
+        <div>
+            <input asp-for="@Model.Phone.Model" placeholder="Model" required />
+            <label asp-for="@Model.Phone.Model"></label>
+            <span asp-validation-for="@Model.Phone.Model"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Storage" placeholder="Storage" required />
+            <label asp-for="@Model.Phone.Storage"></label>
+            <span asp-validation-for="@Model.Phone.Storage"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.SIM_NO" placeholder="SIM_NO" id="SIM_NO" required />
+            <label asp-for="@Model.Phone.SIM_NO"></label>
+            <span asp-validation-for="@Model.Phone.SIM_NO"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Display" placeholder="Display" id="Display" required />
+            <label asp-for="@Model.Phone.Display"></label>
+            <span asp-validation-for="@Model.Phone.Display"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Resolution" placeholder="Resolution" required />
+            <label asp-for="@Model.Phone.Resolution"></label>
+            <span asp-validation-for="@Model.Phone.Resolution"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.OS" placeholder="OS" required />
+            <label asp-for="@Model.Phone.OS"></label>
+            <span asp-validation-for="@Model.Phone.OS"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Card_Slot" placeholder="Card_Slot" required />
+            <label asp-for="@Model.Phone.Card_Slot"></label>
+            <span asp-validation-for="@Model.Phone.Card_Slot"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Main_Camera" placeholder="Main_Camer" id="Main_Camer" required />
+            <label asp-for="@Model.Phone.Main_Camera"></label>
+            <span asp-validation-for="@Model.Phone.Main_Camera"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Front_Camera" placeholder="Front_Camer" id="Front_Camer" required />
+            <label asp-for="@Model.Phone.Front_Camera"></label>
+            <span asp-validation-for="@Model.Phone.Front_Camera"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Phone.Finger_Print" placeholder="Finger_Print" required />
+            <label asp-for="@Model.Phone.Finger_Print"></label>
+            <span asp-validation-for="@Model.Phone.Finger_Print"></span>
+        </div>
+
+    }
+    else if (Model.Car != null)
+    {
+        <div>
+
+            <input asp-for="@Model.Car.Model" placeholder="Model" required />
+            <label asp-for="@Model.Car.Model"></label>
+            <span asp-validation-for="@Model.Car.Model"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Car.fueltype" placeholder="FuelType" required />
+            <label asp-for="@Model.Car.fueltype"></label>
+            <span asp-validation-for="@Model.Car.fueltype"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Car.Transmission" placeholder="Transmission" required />
+            <label asp-for="@Model.Car.Transmission"></label>
+            <span asp-validation-for="@Model.Car.Transmission"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Car.Airbag" placeholder="AirBag" required />
+            <label asp-for="@Model.Car.Airbag"></label>
+            <span asp-validation-for="@Model.Car.Airbag"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Car.Type" placeholder="Type" required />
+            <label asp-for="@Model.Car.Type"></label>
+            <span asp-validation-for="@Model.Car.Type"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Car.Capacity" placeholder="Capacity" id="Capacity" required />
+            <label asp-for="@Model.Car.Capacity"></label>
+            <span asp-validation-for="@Model.Car.Capacity"></span>
+        </div>
+
+    }
+    else if (Model.House != null)
+    {
+        <div>
+
+            <input asp-for="@Model.House.Type" placeholder="Type" required />
+            <label asp-for="@Model.House.Type"></label>
+            <span asp-validation-for="@Model.House.Type"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.House.Num_bedroom" placeholder="No_bedroom" id="No_bedroom" required />
+            <label asp-for="@Model.House.Num_bedroom"></label>
+            <span asp-validation-for="@Model.House.Num_bedroom"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.House.Location" placeholder="Location" required />
+            <label asp-for="@Model.House.Location"></label>
+            <span asp-validation-for="@Model.House.Location"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.House.Num_Bathroom" placeholder="Bathroom" id="Bathroom" required />
+            <label asp-for="@Model.House.Num_Bathroom"></label>
+            <span asp-validation-for="@Model.House.Num_Bathroom"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.House.Total_room" placeholder="Total_room" id="Total_room" required />
+            <label asp-for="@Model.House.Total_room"></label>
+            <span asp-validation-for="@Model.House.Total_room"></span>
+
+        </div>
+
+
+    }
+    else if (Model.Cloth != null)
+    {
+        <div>
+
+            <input asp-for="@Model.Cloth.Brand" placeholder="Brand" required />
+            <label asp-for="@Model.Cloth.Brand"></label>
+            <span asp-validation-for="@Model.Cloth.Brand"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Cloth.Size" placeholder="SizeofCloth" id="SizeofCloth" required />
+            <label asp-for="@Model.Cloth.Size"></label>
+            <span asp-validation-for="@Model.Cloth.Size"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Cloth.Color" placeholder="Colour" required />
+            <label asp-for="@Model.Cloth.Color"></label>
+            <span asp-validation-for="@Model.Cloth.Color"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Cloth.Type" placeholder="Type" required />
+            <label asp-for="@Model.Cloth.Type"></label>
+            <span asp-validation-for="@Model.Cloth.Type"></span>
+        </div>
+
+
+
+    }
+    else if (Model.Shoes != null)
+    {
+        <div>
+
+            <input asp-for="@Model.Shoes.Brand" placeholder="ShoseBrand" required />
+            <label asp-for="@Model.Shoes.Brand"></label>
+            <span asp-validation-for="@Model.Shoes.Brand"></span>
+
+        </div>
+        <div>
+
+            <input asp-for="@Model.Shoes.Size" placeholder="ShoseSize" id="ShoseSize" required />
+            <label asp-for="@Model.Shoes.Size"></label>
+            <span asp-validation-for="@Model.Shoes.Size"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Shoes.Color" placeholder="ShoseColour" required />
+            <label asp-for="@Model.Shoes.Color"></label>
+            <span asp-validation-for="@Model.Shoes.Color"></span>
+        </div>
+
+
+
+
+    }
+
+    <div asp-validation-summary="All"></div>
+    <div>
+        <input multiple asp-for="photo" placeholder="Select a file" style="background:#fbf3f3" />
+        <label asp-for="photo"></label>
+    </div>
+    <div> <img class="editedphoto" src="@PhotoPath" asp-append-version="true" style="width:20%;height:12%" /></div>
+
+    <div>
+        <button type="submit" id="post">Update</button>
+        <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@Model.Id">Cancel</a>
+    </div>
+
+</form>
+
+
+

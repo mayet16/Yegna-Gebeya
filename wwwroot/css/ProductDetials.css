@@ -1,0 +1,68 @@
+﻿.pagetitle {
+    margin-left: 400px;
+    color: #000000
+}
+
+.product_container {
+    border: solid 1px;
+    border-color: red;
+    margin-left: 300px;
+    width: 50%;
+    border-radius: 10px;
+    padding-top: 20px;
+    width: 40%;
+    margin-left: 322px;
+    background: #808080;
+    border-radius: 10px;
+}
+
+.image {
+    margin-left: 200px;
+}
+
+label {
+    font-family: sans-serif;
+    font-style: italic;
+    font: bold;
+    color: darkblue;
+    padding-left: 90px;
+    margin-right: 10px;
+    padding-top: 2px;
+}
+
+.each_element {
+    padding-top: 20px;
+}
+
+.value {
+    border-bottom: solid;
+    border-bottom-color: red;
+    width: 100%;
+    padding-left: 12px;
+}
+
+.Managenmet {
+    margin-left: 100px;
+    width: 30%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+span {
+    margin-left: 0px;
+}
+
+.button {
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 9px;
+    width: 29%;
+    background: chocolate;
+    color: white;
+    font-style: italic;
+}
+
+.button {
+    background: #0026ff;
+    cursor: pointer;
+}

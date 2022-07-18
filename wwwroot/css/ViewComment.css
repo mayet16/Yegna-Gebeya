@@ -1,0 +1,93 @@
+﻿
+
+.commentTotal {
+    text-align: center;
+    width: 50%;
+    border: solid 0;
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.comments {
+    margin-top: 29px;
+    width: 80%;
+}
+
+.each_comments {
+    position: relative;
+    width: 85%;
+    border: solid red;
+    border-radius: 23px;
+    margin-top: 10px;
+    margin-left: 200px;
+    background: #808080
+}
+
+.image {
+    border-radius: 10px;
+    margin-left:110px;
+}
+
+.commentman {
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#commentdate {
+    /*margin-top:-18px;
+    margin-left:180px;
+    position:absolute;*/
+}
+
+#commentbody {
+    margin-left: 20px;
+    margin-top: 9px;
+}
+
+#commentReplay {
+    margin-left: 190px;
+    margin-top: 10px;
+    color: #4800ff
+}
+
+
+label {
+    font-style: oblique;
+    font-family: sans-serif;
+    color: darkblue;
+    margin: 0px auto;
+}
+
+#replay {
+    margin-left: 320px;
+    color: darkblue
+}
+
+
+
+.button {
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 9px;
+    width: 29%;
+    color: white;
+    font-style: italic;
+    /*background: #0026ff;
+    cursor: pointer;*/
+    display: inline;
+    text-decoration: none;
+}
+
+.viewDetial, .back {
+    margin-left: 10px;
+    text-decoration-line: none;
+    font-style: italic;
+    font-family: sans-serif;
+    background: #1e1b1b;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+}

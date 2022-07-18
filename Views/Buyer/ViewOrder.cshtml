@@ -1,0 +1,57 @@
+﻿@model OrderViewModel
+
+<div class="row chekoutForm">
+    <br />
+    <h2 style="margin-left:200px;margin-top:50px;">Your Order Products</h2><br />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected Amount</th>
+                <th>Product</th>
+                <th>Seller Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        @Model.OrderId
+        <tbody>
+            @foreach (var line in Model.Orderdetail)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left">@line.Products.Name</td>
+                    <td class="text-left">@line.Sellers.Users.Name</td>
+                    <td class="text-left">@line.Sellers.Address</td>
+                    <td class="text-left">@line.Sellers.Users.PhoneNumber</td>
+                    <td class="text-right">@line.Products.Price.ToString("c")</td>
+                    <td class="text-right">
+                        @((line.Amount * line.Products.Price).ToString("c"))
+                    </td>
+                    <td class="text-center">
+                        <a class="glyphicon text-danger remove" asp-controller="Buyer"
+                           asp-action="Cancel" asp-route-id="@line.P_ID"
+                           onclick=" return alert('You have Removed one : @line.Products.Name from your cart');">
+                            Remove From Order Cart
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total : </td>
+                <td class="text-right">
+                    @Model.OrderTotal.ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+</div>
+<div>
+    <a class="btn btn-success" asp-controller="Buyer"
+       asp-action="Checkout">Check Out</a>
+</div>

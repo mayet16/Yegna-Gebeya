@@ -1,0 +1,65 @@
+﻿@model YegnaGebiyaSystem.ViewModels.VendorViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Vendor Details";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                @{
+                    var images = "~/images/" + (@Model.Sellers.Users.Image ?? "logo.jpg");
+                }
+                <h1>Selected Vendor : @Model.Sellers.Users.Name</h1>
+            </div>
+
+            <div class=" card-body text-center">
+                <img class="card-img-top imageThumbnail" src="@images" asp-append-version="true" />
+                <h4>Seller Nationality : @Model.Sellers.Users.Nationality</h4>
+                <h4>Seller Address : @Model.Sellers.Address</h4>
+                <h4>Seller Ratting : @Model.Sellers.Ratting%</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Vendor" asp-action="index" class="btn btn-primary">Back</a>
+               </div>
+
+        </div>
+
+    </div>
+
+</div>
+<br /><br />
+<center><h2 style="color:dodgerblue">Seller Products</h2></center>
+<div class="card-deck">
+    @foreach (var product in Model.Products)
+    {
+        var image = "~/images/" + (product.Image ?? "logo.jpg");
+
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+            <div class="card-header">
+
+                <h3>
+
+                    @product.Name
+                </h3>
+                <h3>
+                    @product.AddtDate
+                </h3>
+            </div>
+            <img class="card-img-top imageThumbnail" src="@image" asp-append-version="true" />
+            <div class="card-footer text-center">
+                <a asp-controller="Product" asp-action="details" asp-route-id="@product.ID" class="btn btn-primary">View</a>
+                <a asp-controller="Buyer" asp-action="Order" asp-route-id="@product.ID" class="btn btn-primary">Order Product</a>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+
+
+

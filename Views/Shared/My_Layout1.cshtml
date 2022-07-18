@@ -1,0 +1,134 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
+@inject GebiyaContext _context;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user=scalable=no" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/Header.css" rel="stylesheet" />
+ 
+</head>
+
+<body>
+
+    <section>
+        <div id="myHeader">
+
+            <header>
+
+
+                <ul class="active" id="ParentID" style="margin-left:1px;">
+                    <li>
+                        <a style="color:ghostwhite; margin-top:-7px;margin-left:-10px; ">
+                            <h4 style="float:left" ;>Welcome to Yegna Gebiya &nbsp;&nbsp; Be online Make Your Life Easy</h4>
+                        </a>
+                    </li>
+
+                    <li><a class="child " asp-controller="product" asp-action="ProductList">ProductList</a></li>
+                    <li> <a class="child" asp-controller="product" asp-action="Catagorylist"> Add Product</a></li>
+                    <li> <a class="child" asp-controller="product" asp-action="ViewOrderedProduct">ViewOrder</a></li>
+                    <li><a class="child" asp-controller="product" asp-action="ViewSellerHistory">ViewHistory</a></li>
+                    <li><a class="child" asp-controller="product" asp-action="index">BuyerPage</a></li>
+
+
+
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        string Logedinname = null;
+                        Logedinname = User.Identity.Name;
+                        User loginuser = _context.Users.SingleOrDefault(user => user.UserName == Logedinname);
+
+                        <li class="child">
+                            <form method="post" asp-action="LogOut" asp-controller="account">
+                                <button class="logout" type="submit">LogOut @User.Identity.Name</button>
+
+                            </form>
+                        </li>
+                    }
+
+                </ul>
+
+            </header>
+        </div>
+
+        <div class="main_body">
+            @RenderBody()
+        </div>
+       
+            @if (IsSectionDefined("Scripts"))
+            {
+                @RenderSection("Scripts", required: true)
+            }
+       
+
+    </section>
+    <footer>
+        <div class="follow-us">
+            <ul class="email">
+                <li>
+                    <input type="email" name="email" placeholder="enter your email" id="email" />
+                </li>
+                <li>
+                    <input type="submit" name="submit" value="Submit email" id="submit-email" />
+                </li>
+            </ul>
+            <ul class="media">
+                <li>FOLLOW US</li>
+                <li>
+                    <a href="www.instagram.com/Yegna" value="Instagram" target="_blank">
+                        <img src="~/images/instagram.png" id="instagram" />
+                    </a>
+                </li>
+                <li>
+                    <a href="www.facebook.com/Yegna" value="Facebook" target="_blank">
+                        <img src="~/images/facebook.png" id="facebook" />
+                    </a>
+                </li>
+                <li>
+                    <a href="www.twitter.com/Yegna" value="twitter" target="_blank">
+                        <img src="~/images/twitter.png" id="twitter" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer">
+            <div class="article column1">
+                <h3>MY ACCOUNT</h3>
+                <p>
+                    <a asp-controller="account" asp-action="login">Sign in</a>
+                </p>
+                <p>
+                    <a asp-controller="account" asp-action="register">Register</a>
+                </p>
+                <p>
+                    <a asp-controller="Home" asp-action="contact">contact us</a>
+                </p>
+            </div>
+            <div class="article column2">
+                <h3>CUSTOMER SERVICES</h3>
+                <p>
+                    <a asp-controller="buyer" asp-action="vieworder">about your order</a>
+                </p>
+                <p>
+                    <a asp-controller="vendor" asp-action="index">Vendor</a>
+                </p>
+            </div>
+            <div class="article column3">
+                <h3>ABOUT US</h3>
+                <p>
+                    <a asp-controller="Home" asp-action="about" value="about">about us</a>
+                </p>
+                <p>
+                    <a asp-controller="Home" asp-action="Privacy" value="policy">privacy policy</a>
+                </p>
+            </div>
+        </div>
+        <div id="copy">
+            YegnaGebiyaSystem &copy; 2019 -
+        </div>
+    </footer>
+</body>
+</html>

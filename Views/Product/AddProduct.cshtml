@@ -1,0 +1,407 @@
+﻿@model ProductViewModel
+
+@{
+    Layout = "My_Layout1";
+    ViewBag.Title = "Product Detials";
+}
+
+<link href="~/css/Addproduct.css" rel="stylesheet" />
+<script src="~/js/InputValidation.js"></script>
+
+<h2>  Enter  @Model.SubCatagoryName Detials</h2>
+<div> <p style="color:red" id="demo"></p> </div>
+
+<form enctype="multipart/form-data" name="AddProductForm" id="form" onsubmit="return ValidateAddProductForm();"
+      asp-controller="Product" asp-action="InsertProduct" method="post">
+    <div class="c_id">
+        <input style="background:#eae7e7" class="c_id" asp-for="C_id" readonly />
+        <label asp-for="C_id"></label>
+
+    </div>
+
+
+    <div class="subCatagory">
+
+        <input asp-for="SubCatagoryName" style="background:#eae7e7" id="SubCatagoryName" readonly />
+        <label asp-for="SubCatagoryName"></label>
+
+    </div>
+
+
+    <div>
+        <input asp-for="photo" style="background:#fbf3f3" required />
+        <label asp-for="photo"></label>
+
+    </div>
+
+    <div>
+
+        <input asp-for="@Model.Product.Quantity" id="Quantity" required type="text" value="" onkeypress="onlynum(event)" />
+        <label asp-for="@Model.Product.Quantity"></label>
+        <span asp-validation-for="@Model.Product.Quantity"></span>
+    </div>
+    <div>
+
+        <input asp-for="@Model.Product.Price" id="Price" required placeholder="In Ethio Birr" type="text" onkeypress="onlyIntAndDuble(event)" value="" />
+        <label asp-for="@Model.Product.Price"></label>
+        <span asp-validation-for="@Model.Product.Price"></span>
+    </div>
+    <div>
+
+
+        <select asp-for="@Model.Product.Services">
+            <option value="Used"> Used</option>
+            <option value="New"> New</option>
+        </select>
+        <label asp-for="@Model.Product.Services"></label>
+        <span asp-validation-for="@Model.Product.Services"></span>
+    </div>
+    @if (@Model.SubCatagory.SubcatagoryName == "Book")
+    {
+        <div>
+
+            <input asp-for="@Model.Product.Name" placeholder="Name" required />
+            <label asp-for="@Model.Product.Name"></label>
+            <span asp-validation-for="@Model.Product.Name"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.ISBN" required id="ISBN" placeholder="ISBN">
+            <label asp-for="@Model.Book.ISBN"></label>
+            <span asp-validation-for="@Model.Book.ISBN"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.No_page" required id="No_page" type="text" value="" placeholder="Number Of Pages(number only)" onkeypress="onlynum(event)">
+            <label asp-for="@Model.Book.No_page"></label>
+            <span asp-validation-for="@Model.Book.No_page"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.Type" required placeholder="Type">
+            <label asp-for="@Model.Book.Type"></label>
+            <span asp-validation-for="@Model.Book.Type"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Book.Author" id="Author" required placeholder="Author">
+            <label asp-for="@Model.Book.Author"></label>
+            <span asp-validation-for="@Model.Book.Author"></span>
+        </div>
+
+
+    }
+
+    else if (@Model.SubCatagory.SubcatagoryName == "Computer")
+    {
+        <div>
+
+            <input asp-for="@Model.Product.Name" placeholder="Name" required />
+            <label asp-for="@Model.Product.Name"></label>
+            <span asp-validation-for="@Model.Product.Name"></span>
+        </div>
+
+        <div>
+
+            <input asp-for="@Model.Computer.Model" spellcheck="true" required placeholder="Model">
+            <label asp-for="@Model.Computer.Model"></label>
+            <span asp-validation-for="@Model.Computer.Model"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Core" required placeholder="Core">
+            <label asp-for="@Model.Computer.Core"></label>
+            <span asp-validation-for="@Model.Computer.Core"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.CPU" required id="CPU" type="text" value="" placeholder="CPU( only number)" onkeypress="onlyIntAndDuble(event)">
+            <label asp-for="@Model.Computer.CPU"></label>
+            <span asp-validation-for="@Model.Computer.CPU"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.RAM" required min="1" id="RAM" placeholder="RAM ( only number)" onkeypress="onlynum(event)" value="" type="text">
+            <label asp-for="@Model.Computer.RAM"></label>
+            <span asp-validation-for="@Model.Computer.RAM"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Procesor_Speed" required id="Processer_Speed" placeholder="Processor Speed ( only number)" onkeypress="onlyIntAndDuble(event)" value="" type="text">
+            <label asp-for="@Model.Computer.Procesor_Speed"></label>
+            <span asp-validation-for="@Model.Computer.Procesor_Speed"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Processor_Type" placeholder="Processor Type" required>
+            <label asp-for="@Model.Computer.Processor_Type"></label>
+            <span asp-validation-for="@Model.Computer.Processor_Type"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.OS" required placeholder="OS">
+            <label asp-for="@Model.Computer.OS"></label>
+            <span asp-validation-for="@Model.Computer.OS"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Hard_Disk" required id="Hard_Disk" placeholder="Hard_Disk ( only number)" onkeypress="onlyIntAndDuble(event)" value="" type="text">
+            <label asp-for="@Model.Computer.Hard_Disk"></label>
+            <span asp-validation-for="@Model.Computer.Hard_Disk"></span>
+        </div>
+
+        <div>
+
+            <input asp-for="@Model.Computer.Resolution" placeholder="Resolution" required>
+            <label asp-for="@Model.Computer.Resolution"></label>
+            <span asp-validation-for="@Model.Computer.Resolution"></span>
+        </div>
+        <div>
+
+            <input asp-for="@Model.Computer.Size" required placeholder="Size ( only number)" id="Size" onkeypress="onlyIntAndDuble(event)" value="" type="text">
+            <label asp-for="@Model.Computer.Size"></label>
+            <span asp-validation-for="@Model.Computer.Size"></span>
+        </div>
+
+
+    }
+
+
+    else if (@Model.SubCatagory.SubcatagoryName == "House")
+    {
+
+        
+<div>
+
+    <input asp-for="@Model.Product.Name" readonly />
+    <label asp-for="@Model.Product.Name"></label>
+
+</div>
+<div>
+
+    <input asp-for="@Model.House.Num_bedroom"
+           required type="text" value="" placeholder="No of Bed Room ( only number)" onkeypress="onlynum(event)">
+
+    <label asp-for="@Model.House.Num_bedroom"></label>
+    <span asp-validation-for="@Model.House.Num_bedroom"></span>
+</div>
+
+<div>
+
+    <input asp-for="@Model.House.Location" placeholder="Location" required>
+    <label asp-for="@Model.House.Location"></label>
+    <span asp-validation-for="@Model.House.Location"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.House.Num_Bathroom" min="0" required id="Bathroom" onkeypress="onlynum(event)" placeholder="Bathroom ( only number)" value="" type="text">
+    <label asp-for="@Model.House.Num_Bathroom"></label>
+    <span asp-validation-for="@Model.House.Num_Bathroom"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.House.Total_room" min="0" required onkeypress="onlynum(event)" id="Total_room" placeholder="TotalRoom ( only number)" value="" type="text">
+    <label asp-for="@Model.House.Total_room"></label>
+    <span asp-validation-for="@Model.House.Total_room"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.House.Type" placeholder="Type" required>
+    <label asp-for="@Model.House.Type"></label>
+    <span asp-validation-for="@Model.House.Type"></span>
+</div>
+
+}
+else if (@Model.SubCatagory.SubcatagoryName == "Phone")
+{
+<div>
+
+    <input asp-for="@Model.Product.Name" placeholder="Name" required />
+    <label asp-for="@Model.Product.Name"></label>
+    <span asp-validation-for="@Model.Product.Name"></span>
+</div>
+
+<div>
+
+    <input asp-for="@Model.Phone.Model" placeholder="Model" required>
+    <label asp-for="@Model.Phone.Model"></label>
+    <span asp-validation-for="@Model.Phone.Model"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Storage" required placeholder="Storage ( only number)" id="Storage" onkeypress="onlynum(event)" type="text" value="">
+    <label asp-for="@Model.Phone.Storage"></label>
+    <span asp-validation-for="@Model.Phone.Storage"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.SIM_NO" required onkeypress="onlynum(event)" id="SIM_NO" placeholder="Sim No" type="text" value="">
+    <label asp-for="@Model.Phone.SIM_NO"></label>
+    <span asp-validation-for="@Model.Phone.SIM_NO"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Display" required onkeypress="onlyIntAndDuble(event)" id="Display" placeholder="Display ( only number)" type="text" value="">
+    <label asp-for="@Model.Phone.Display"></label>
+    <span asp-validation-for="@Model.Phone.Model"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Resolution" placeholder="Resolution" required>
+    <label asp-for="@Model.Phone.Resolution"></label>
+    <span asp-validation-for="@Model.Phone.Resolution"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Card_Slot" placeholder="Card_Slot" required>
+    <label asp-for="@Model.Phone.Card_Slot"></label>
+    <span asp-validation-for="@Model.Phone.Card_Slot"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.OS" required placeholder="OS">
+    <label asp-for="@Model.Phone.OS"></label>
+    <span asp-validation-for="@Model.Phone.OS"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Main_Camera" min="1" required placeholder="Main_Camera ( only number)" id="Main_Camer" onkeypress="onlynum(event)" type="text" value="">
+    <label asp-for="@Model.Phone.Main_Camera"></label>
+    <span asp-validation-for="@Model.Phone.Main_Camera"></span>
+</div>
+
+<div>
+
+    <input asp-for="@Model.Phone.Front_Camera" required onkeypress="onlynum(event)" id="Front_Camer" placeholder="Front_Camera ( only number)" type="text" value="">
+    <label asp-for="@Model.Phone.Front_Camera"></label>
+    <span asp-validation-for="@Model.Phone.Front_Camera"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Phone.Finger_Print" placeholder="Finger_Print" required>
+    <label asp-for="@Model.Phone.Finger_Print"></label>
+    <span asp-validation-for="@Model.Phone.Finger_Print"></span>
+</div>
+
+}
+else if (@Model.SubCatagory.SubcatagoryName == "Car")
+{
+<div>
+
+    <input asp-for="@Model.Product.Name" placeholder="Name" required />
+    <label asp-for="@Model.Product.Name"></label>
+    <span asp-validation-for="@Model.Product.Name"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Car.Model" placeholder="Model" required>
+    <label asp-for="@Model.Car.Model"></label>
+    <span asp-validation-for="@Model.Car.Model"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Car.fueltype" placeholder="FuelType" required>
+    <label asp-for="@Model.Car.fueltype"></label>
+    <span asp-validation-for="@Model.Car.fueltype"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Car.Transmission" placeholder="Transmission" required>
+    <label asp-for="@Model.Car.Transmission"></label>
+    <span asp-validation-for="@Model.Car.Transmission"></span>
+</div>
+<div>
+
+    <select asp-for="@Model.Car.Airbag">
+        <option value="Yes"> Yes</option>
+        <option value="No"> No</option>
+    </select>
+    <label asp-for="@Model.Car.Airbag"></label>
+    <span asp-validation-for="@Model.Car.Airbag"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Car.Type" placeholder="Type" required>
+    <label asp-for="@Model.Car.Type"></label>
+    <span asp-validation-for="@Model.Car.Type"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Car.Capacity" min="1" required placeholder="Capacity(in number)" id="Capacity" onkeypress="onlynum(event)" value="" type="text">
+    <label asp-for="@Model.Car.Capacity"></label>
+    <span asp-validation-for="@Model.Car.Capacity"></span>
+</div>
+
+}
+
+else if (@Model.SubCatagory.SubcatagoryName == "Cloth")
+{
+<div>
+
+    <input asp-for="@Model.Product.Name" placeholder="Name" required />
+    <label asp-for="@Model.Product.Name"></label>
+    <span asp-validation-for="@Model.Product.Name"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Cloth.Brand" placeholder="Brand" required>
+    <label asp-for="@Model.Cloth.Brand"></label>
+    <span asp-validation-for="@Model.Cloth.Brand"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Cloth.Size" min="1" required placeholder="ClothSize ( only number)" id="SizeofCloth" onkeypress="onlynum(event)" value="" type="text">
+    <label asp-for="@Model.Cloth.Size"></label>
+    <span asp-validation-for="@Model.Cloth.Size"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Cloth.Color" placeholder="Color" required>
+    <label asp-for="@Model.Cloth.Color"></label>
+    <span asp-validation-for="@Model.Cloth.Color"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Cloth.Type" placeholder="Type" required>
+    <label asp-for="@Model.Cloth.Type"></label>
+    <span asp-validation-for="@Model.Cloth.Type"></span>
+</div>
+
+}
+else if (@Model.SubCatagory.SubcatagoryName == "Shoes")
+
+{
+
+
+
+<div>
+    <input asp-for="@Model.Product.Name" />
+    <label asp-for="@Model.Product.Name"></label>
+
+
+</div>
+
+<div>
+
+    <input asp-for="@Model.Shoes.Brand" placeholder="ShoseBrand" required>
+    <label asp-for="@Model.Shoes.Brand"></label>
+    <span asp-validation-for="@Model.Shoes.Brand"></span>
+</div>
+<div>
+
+    <input asp-for="@Model.Shoes.Size" min="1" placeholder="Size ( only number)" required id="ShoseSize" onkeypress="onlynum(event)" value="" type="text">
+    <span asp-validation-for="@Model.Shoes.Size"></span>
+    <label asp-for="@Model.Shoes.Size"></label>
+</div>
+<div>
+
+    <input asp-for="@Model.Shoes.Color" placeholder="Color" required>
+    <span asp-validation-for="@Model.Shoes.Color"></span>
+    <label asp-for="@Model.Shoes.Color"></label>
+</div>
+}
+    <button type="submit" id="post">+ Add Product</button>
+
+</form>
+
+

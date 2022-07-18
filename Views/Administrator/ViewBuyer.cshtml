@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BuyerViewModel>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "View state";
+}
+    <div class="container">
+        <h1>List of Buyers</h1>
+        <a asp-action="ViewState" class="btn btn-primary">List of Users</a>
+        <a asp-action="ViewSeller" class="btn btn-primary">List of Sellers</a>
+        <a asp-action="ViewBuyer" class="btn btn-primary">List of Buyers</a>
+
+        <br />
+        <br />
+
+        <table class="table table-hover border">
+            <thead style="background-color:aqua">
+                <tr>
+                    <th scope="col">Buyer Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Nationality</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var buyer in Model)
+                {
+                    <tr>
+                        <th scope="row">@buyer.buyer.B_ID</th>
+                        <td>@buyer.user.Name</td>
+                        <td>@buyer.buyer.Users.PhoneNumber</td>
+                        <td>@buyer.user.Sex</td>
+                        <td>@buyer.user.Nationality</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

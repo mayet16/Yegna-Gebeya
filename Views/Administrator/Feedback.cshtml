@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FeedbackViewModel>
+@{
+        Layout = "_LayoutOfAdmin";
+    ViewData["Title"] = "Feedback";
+}
+    <div class="container">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="container">
+            <h1 class="text-center">Feedback on the system</h1>
+
+            @foreach (var feedback in Model)
+            {
+                var photoPath = "~/images/" + (feedback.feedback.Users.Image ?? "try.jpg");
+                <div class="media">
+                    <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" asp-append-version="true" src="@photoPath" alt="Avatar">
+                    <div class="media-body">
+                        <h5 class="mt-0 font-weight-bold blue-text">@feedback.feedback.Users.Name</h5>
+                        @feedback.feedback.FeedbackBody
+                        <div class="media">
+                            <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="~/images/try.jpg" alt="Avatar">
+                            <div class="media-body">
+                                <h5 class="mt-0 font-weight-bold blue-text">@User.Identity.Name <label style="background-color:green">Admin</label></h5>
+                                @feedback.feedback.Replay
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a asp-controller="Administrator" asp-action="ReplayFeedback" asp-route-id="@feedback.feedback.ID" class="btn btn-primary">Replay</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

@@ -1,0 +1,72 @@
+﻿
+#form {
+   
+    width: 40%;
+    margin-left: 322px;
+    border-radius:10px;
+}
+
+label {
+    font-style: oblique;
+    font-family: sans-serif;
+    color: darkblue;
+    margin: 0px auto;
+    margin-top: 15px;
+    float: right;
+}
+
+h2 {
+    text-align: right;
+    background:burlywood;
+    color: brown;
+    margin-left:auto
+}
+input, select {
+    margin-right: 7px;
+    width: 60%;
+    clear: both;
+    color: black;
+    padding: 10px;
+    border-radius: 9px;
+    float: right;
+    margin:4px;
+}
+    input, select:hover{
+ cursor:pointer;
+    }
+    select {
+        width: 63%;
+    }
+    #post {
+        padding: 8px;
+        margin-left: 210px;
+        border-radius: 9px;
+        width: 29%;
+        background-color:green;
+        color: white;
+        font-style: italic;
+    }
+
+    #post:hover {
+        cursor: pointer;
+    }
+.editedphoto {
+    margin-left: 230px;
+    border-radius: 29px;
+}
+.Managenmet {
+    margin-left: 270px;}
+.button {
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 9px;
+    width: 37%;
+    background: chocolate;
+    color: white;
+    font-style: italic;
+}
+
+.button {
+    background-color:green;
+    cursor: pointer;
+}

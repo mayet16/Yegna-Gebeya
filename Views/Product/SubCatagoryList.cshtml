@@ -1,0 +1,18 @@
+﻿@model ProductViewModel
+@{
+    Layout = "My_Layout1";
+}
+<form asp-controller="Product" asp-action="SubCatagoryList" method="post">
+
+
+    <div asp-validation-summary="ModelOnly"></div>
+    <label asp-for="SubCatagoryName"></label>
+    <select asp-for="Id" asp-items="@(new SelectList(@ViewBag.ListofSubCategory,"Id","SubCatagoryName","C_ID"))"></select>
+    <button type="submit">Submit</button>
+    <h1>@ViewBag.PleaseSelect</h1>
+</form>
+
+
+
+
+

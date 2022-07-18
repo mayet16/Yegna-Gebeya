@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SellerOrderListViewModel>
+
+<link href="~/css/ViewComment.css" rel="stylesheet" />
+
+@{
+    var count = 1;
+    var PhotoPath = "~/Images/" + "Koala.jpg";
+    var buyerPhoto = "";
+    Layout = "My_Layout1";
+}
+<div class="commentTotal">
+
+    @foreach (var comment in Model)
+    {
+        <div class="productDetails">
+            @if (count == 1)
+            {
+                PhotoPath = "~/Images/" + (@comment.products.Image ?? "half.jpg");
+
+                <div>
+
+                    <img src="@PhotoPath" class="image" asp-append-version="true" style="width:10%;height:10%" alt="noimage" />
+                </div>
+                <div>
+                    <label>Product Name:</label>
+                    <span style="color:chocolate">@comment.products.Name</span>
+                </div>
+                <div>
+                    &nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="button">
+                    <a class="back" asp-controller="Product" asp-action="ProductList">
+                        Back
+                    </a>
+                    <a class="viewDetial" asp-controller="Product" asp-action="Productdetails" asp-route-id="@comment.products.ID">
+                        ViewProductDetial
+                    </a>
+                </div>
+                <hr />
+                count = 0;
+            }
+        </div>
+        <div class="comments">
+            <div class="each_comments">
+
+                @if (true)
+                {
+                    buyerPhoto = "~/Images/" + (@comment.users.Image ?? "half.jpg");
+                    <span id="name">  <b> @comment.users.Name </b></span>
+                    <span id="commentdate">   @comment.comments.Sent_Date </span>
+                    <img class="commentman" src="@buyerPhoto" asp-append-version="true" style="width:10%;height:10%" alt="noimage" />
+
+
+                    <div id="commentbody"> @comment.comments.CommentBody</div>
+                    <div id="commentReplay"> @comment.comments.Replay</div>
+                }
+                @if (@comment.comments.Replay != null)
+                {
+                    <div>
+                        <a asp-controller="Product" id="replay" asp-action="ReplayToComment" asp-route-id="@comment.comments.Com_ID">EditReplay</a>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <a asp-controller="Product" id="replay" asp-action="ReplayToComment" asp-route-id="@comment.comments.Com_ID">ReplayTOComment</a>
+                    </div>
+                }
+                <hr />
+
+            </div>
+
+        </div>
+    }
+
+</div>
+

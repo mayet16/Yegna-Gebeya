@@ -1,0 +1,69 @@
+﻿@model OrderViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <center><h2>You History List</h2></center>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Seller Name</th>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Services</th>
+                <th>Sold Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var solditem in Model.history_item)
+            {
+                <tr>
+
+                    <td>@solditem.Sellers.Users.PhoneNumber</td>
+                    <td>@solditem.Sellers.Address</td>
+                    <td>@solditem.Sellers.Users.Name</td>
+                    <td>@solditem.Products.Name</td>
+                    <td>@solditem.Products.Price</td>
+                    <td>@solditem.Products.Services</td>
+                    <td>@solditem.S_Date</td>
+                    <td>
+                        <a asp-controller="Buyer" asp-action="Delete" asp-route-id="@solditem.S_i_ID"
+                           class="text-danger" onclick=" return confirm('Are you Sure You Want to Delete ?')">
+                            Delete
+                        </a>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

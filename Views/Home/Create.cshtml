@@ -1,0 +1,8 @@
+﻿@model YegnaGebiyaSystem.ViewModels.ProductCategoryViewModel
+
+<form asp-action="create" asp-controller="Home">
+    <select asp-for="SelectedCategory" asp-items="@Model.Categories">
+        <option>Select one</option>
+    </select>
+    <input type="submit" />
+</form>

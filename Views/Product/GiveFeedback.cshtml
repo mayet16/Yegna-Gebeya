@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SellerOrderListViewModel>
+
+<link href="~/css/ViewComment.css" rel="stylesheet" />
+<div class="comments">
+    @foreach (var feedback in Model)
+    {
+
+        
+
+            <div id="name">  <b> @feedback.users.Name </b></div>
+            <div id="commentdate">   @feedback.feedback.Sent_Date </div>
+            <div id="commentbody"> @feedback.feedback.FeedbackBody</div>
+
+
+
+
+
+
+    }
+    <div id="ReplayTOComment">
+
+        <form method="post" asp-controller="Product" asp-action="GiveFeedback">
+
+            @*<textarea asp-for=""></textarea>*@
+            <button type="submit"> ReplayTOComment</button>
+        </form>
+       
+    </div>
+
+</div>
+
